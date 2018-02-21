@@ -28,12 +28,19 @@ public class SystemPropertyTest {
     @Test
     public void SystemPropertyをファイルから追加するよ() throws Exception {
         FileInputStream propFile = new FileInputStream( "myProperties.txt");
+        // 最初にデフォルトのSystemPropertyを取得してPropertiesをインスタンス化する。
+        // new Properties() のような書き方もできてしまうので、SystemPropertyが全部吹っ飛ばないように注意。　
         Properties p = new Properties(System.getProperties());
+        // これでデフォルトにmyProperties.txtに記述したプロパティが追加された形になる。
         p.load(propFile);
 
+        // PropertiesインスタンスをSystemPropertyとしてセットする。
         System.setProperties(p);
+
+        // プロパティの一覧を表示する。
         System.getProperties().list(System.out);
 
+        // 追加したプロパティで値が取得できる。
         System.out.println(System.getProperty("subliminal.message"));
     }
 }
