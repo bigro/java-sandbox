@@ -1,2 +1,2 @@
 rootProject.name = 'java-sandbox'
-include 'system-properties'
+include 'system-properties', 'sandbox'
