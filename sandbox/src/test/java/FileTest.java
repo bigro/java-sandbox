@@ -1,6 +1,9 @@
 import org.junit.Test;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileTest {
 
@@ -19,5 +22,21 @@ public class FileTest {
         System.out.println("ParentFile: " + file.getParentFile());
         System.out.println("TotalSpace: " + file.getTotalSpace());
         System.out.println("UsableSpace: " + file.getUsableSpace());
+    }
+
+    @Test
+    public void Filesのmoveメソッドの挙動確認() throws Exception {
+        // fuga.txtがあれば事前に削除しておく
+        File fuga = new File("src/test/resources/fuga.txt");
+        if (fuga.exists()) {
+            fuga.delete();
+        }
+
+        File hoge = new File("src/test/resources/hoge.txt");
+        hoge.createNewFile();
+
+        Path path = hoge.toPath();
+        Files.move(path, path.resolveSibling("fuga.txt"));
+
     }
 }
